@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+const posts = await getCollection('blog');
+console.log('All posts:', posts.map(p => ({ slug: p.slug, title: p.data.title })));
+
+const sortedPosts = posts.sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+console.log('Sorted posts:', sortedPosts.map(p => ({ slug: p.slug, title: p.data.title })));
+---
+
+<Layout title="Blog | pryority">
+  <div class="space-y-16">
+    <section class="space-y-4">
+      <h1 class="text-3xl font-medium">Blog</h1>
+      <p class="text-[var(--color-text)]/60">
+        Thoughts on cycling, technology, and life in San Francisco.
+      </p>
+    </section>
+
+    <section class="space-y-12">
+      {sortedPosts.map((post: CollectionEntry<'blog'>) => (
+        <article class="group">
+          <a href={`/blog/${post.slug}`} class="block space-y-3">
+            <div class="space-y-1">
+              <h2 class="text-xl font-medium link-hover inline-block">
+                {post.data.title}
+              </h2>
+              <p class="text-[var(--color-text)]/60 leading-relaxed">
+                {post.data.description}
+              </p>
+            </div>
+            
+            <div class="flex items-center gap-4 text-sm text-[var(--color-text)]/40">
+              <time>
+                {new Date(post.data.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+              {post.data.tags && post.data.tags.length > 0 && (
+                <span class="flex gap-2">
+                  {post.data.tags.map((tag: string) => (
+                    <span class="link-hover text-xs">{tag}</span>
+                  ))}
+                </span>
+              )}
+            </div>
+          </a>
+        </article>
+      ))}
+    </section>
+  </div>
+</Layout> 

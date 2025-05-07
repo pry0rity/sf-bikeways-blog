@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/^blog\//, '').replace(/\.md$/, '') },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title}>
+  <article class="prose dark:prose-invert max-w-none">
+    <header class="mb-8">
+      <h1 class="text-3xl font-medium mb-4">{post.data.title}</h1>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
+        {post.data.description}
+      </p>
+      <div class="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
+        <time datetime={post.data.date.toISOString()}>
+          {post.data.date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}
+        </time>
+        {post.data.location && (
+          <span>📍 {post.data.location}</span>
+        )}
+        {post.data.weather && (
+          <span>🌤️ {post.data.weather}</span>
+        )}
+      </div>
+      {post.data.tags && post.data.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-4">
+          {post.data.tags.map((tag: string) => (
+            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-sm">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="prose-lg">
+      <Content />
+    </div>
+
+    {post.data.coordinates && (
+      <div class="mt-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+        <h2 class="text-lg font-medium mb-4">Ride Location</h2>
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          Coordinates: {post.data.coordinates.lat}, {post.data.coordinates.lng}
+        </p>
+        {/* Map will be added here in a future update */}
+      </div>
+    )}
+  </article>
+</Layout>
+
+<style>
+  :global(.prose) {
+    max-width: 65ch;
+    margin: 0 auto;
+  }
+  :global(.prose img) {
+    border-radius: 0.5rem;
+  }
+  :global(.prose h2) {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-weight: 500;
+    font-size: 1.125rem; /* text-lg */
+  }
+  :global(.prose p) {
+    margin-bottom: 1.5em;
+  }
+</style> 

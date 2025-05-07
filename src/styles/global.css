@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: 'Clash Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --color-bg: #fafafa;
+    --color-text: #1a1a1a;
+    --color-accent: #008000;
+    --color-accent-hover: #006400;
+  }
+
+  .dark {
+    --color-bg: #0a0a0a;
+    --color-text: #fafafa;
+    --color-accent: #00a000;
+    --color-accent-hover: #008000;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    letter-spacing: 0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Clash Grotesk', var(--font-sans);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  body {
+    @apply antialiased;
+    font-weight: 400;
+  }
+}
+
+@layer components {
+  .link-hover {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: var(--color-text);
+    padding: 0.1em 0.2em;
+    margin: -0.1em -0.2em;
+    border-radius: 0.2em;
+    transition: color 0.3s ease;
+    isolation: isolate;
+  }
+
+  .link-hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+    border-radius: 0.2em;
+  }
+
+  .link-hover:hover {
+    color: var(--color-bg);
+  }
+
+  .link-hover:hover::before {
+    transform: scaleX(1);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-hover);
+} 
