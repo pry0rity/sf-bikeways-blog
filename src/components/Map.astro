@@ -1,0 +1,127 @@
+---
+interface Props {
+  height?: string;
+  className?: string;
+  showControls?: boolean;
+}
+
+const { height = "400px", className = "", showControls = true } = Astro.props;
+---
+
+<div id="map" class={`w-full ${className}`} style={`height: ${height}`}
+  data-show-controls={showControls}></div>
+
+<script>
+  import 'leaflet/dist/leaflet.css';
+  import L from 'leaflet';
+
+  // Fix Leaflet default marker icons
+  // @ts-ignore
+  delete L.Icon.Default.prototype._getIconUrl;
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
+    iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+    shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+  });
+
+  // Initialize map
+  const map = L.map('map').setView([37.7749, -122.4194], 13);
+
+  // Add OpenStreetMap tiles with error logging
+  const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  });
+  tileLayer.on('tileerror', function(e) {
+    console.error('Tile loading error:', e);
+  });
+  tileLayer.addTo(map);
+
+  // Get showControls from data attribute
+  const showControls = document.getElementById('map')?.getAttribute('data-show-controls') === 'true';
+
+  // Load routes from JSON
+  fetch('/data/routes.json')
+    .then(response => {
+      if (!response.ok) throw new Error('Failed to load /data/routes.json');
+      return response.json();
+    })
+    .then(routes => {
+      console.log('Loaded routes:', routes);
+      if (!Array.isArray(routes) || routes.length === 0) {
+        console.warn('No routes found in /data/routes.json');
+        return;
+      }
+      routes.forEach(route => {
+        const geojson = route.geojson;
+        if (!geojson || !geojson.geometry || !geojson.geometry.coordinates) {
+          console.warn('Invalid geojson for route:', route);
+          return;
+        }
+        const layer = L.geoJSON(geojson, {
+          style: {
+            color: "#008000",
+            weight: 4,
+            opacity: 0.7
+          }
+        });
+
+        // Add hover effects
+        layer.on({
+          mouseover: () => {
+            layer.setStyle({ color: "#00ff00", weight: 6 });
+            if (showControls) {
+              const popup = L.popup()
+                .setLatLng(geojson.geometry.coordinates[0])
+                .setContent(`
+                  <div class="p-2">
+                    <h3 class="font-medium">${route.title}</h3>
+                    <p class="text-sm text-gray-600">
+                      ${(route.distance / 1000).toFixed(1)}km • 
+                      ${Math.round(route.elevation)}m elevation
+                    </p>
+                  </div>
+                `);
+              layer.bindPopup(popup).openPopup();
+            }
+          },
+          mouseout: () => {
+            layer.setStyle({ color: "#008000", weight: 4 });
+            if (showControls) {
+              layer.closePopup();
+            }
+          },
+          click: () => {
+            window.location.href = route.blogUrl;
+          }
+        });
+
+        layer.addTo(map);
+      });
+
+      // Fit map to show all routes
+      const allCoords = routes.flatMap(route => route.geojson?.geometry?.coordinates || []);
+      if (allCoords.length > 0) {
+        const bounds = L.latLngBounds(allCoords.map(([lng, lat]) => [lat, lng]));
+        map.fitBounds(bounds, { padding: [50, 50] });
+      } else {
+        console.warn('No valid coordinates found in routes.');
+      }
+    })
+    .catch(error => console.error('Error loading routes:', error));
+</script>
+
+<style>
+  .leaflet-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .leaflet-popup-content {
+    margin: 0;
+  }
+
+  .leaflet-popup-content-wrapper {
+    padding: 0;
+    border-radius: 0.5rem;
+  }
+</style> 

@@ -92,16 +92,16 @@ async function main() {
   console.log(`✅ Filtered to ${results.length} valid rides`);
 
   // Ensure the data directory exists
-  const dataDir = "./src/data";
+  const dataDir = "./public/data";
   if (!fs.existsSync(dataDir)) {
     fs.mkdirSync(dataDir, { recursive: true });
   }
 
   fs.writeFileSync(
-    "./src/data/routes.json", 
+    "./public/data/routes.json", 
     JSON.stringify(results, null, 2)
   );
-  console.log("✅ Synced Strava routes to src/data/routes.json");
+  console.log("✅ Synced Strava routes to public/data/routes.json");
 }
 
 main().catch((error) => {
