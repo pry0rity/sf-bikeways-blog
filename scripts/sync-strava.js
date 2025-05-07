@@ -3,6 +3,7 @@ const require = createRequire(import.meta.url);
 
 import fetch from "node-fetch";
 import dotenv from "dotenv";
+import slugify from "slugify";
 dotenv.config();
 
 const fs = require("fs");
@@ -28,19 +29,19 @@ async function getAccessToken() {
 }
 
 async function fetchActivities(token) {
-    const res = await fetch(`${STRAVA_ACTIVITIES_URL}?per_page=30`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  
-    const data = await res.json();
-    if (!Array.isArray(data)) {
-      console.error("❌ Unexpected response from Strava:");
-      console.dir(data, { depth: null });
-      process.exit(1);
-    }
-  
-    return data;
+  const res = await fetch(`${STRAVA_ACTIVITIES_URL}?per_page=30`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  const data = await res.json();
+  if (!Array.isArray(data)) {
+    console.error("❌ Unexpected response from Strava:");
+    console.dir(data, { depth: null });
+    process.exit(1);
   }
+
+  return data;
+}
 
 function polylineToGeoJSON(encoded) {
   const coords = polyline.decode(encoded);
@@ -54,30 +55,56 @@ function polylineToGeoJSON(encoded) {
   };
 }
 
+function buildSlug(title, date) {
+  const shortDate = new Date(date).toISOString().split("T")[0]; // YYYY-MM-DD
+  return `/rides/${slugify(`${title} ${shortDate}`, { lower: true })}`;
+}
+
+function isRideWithGeojson(activity) {
+  return (
+    activity.type === "Ride" && 
+    activity.map?.summary_polyline && 
+    activity.map.summary_polyline.length > 0
+  );
+}
+
 async function main() {
-    const token = await getAccessToken();
-    const activities = await fetchActivities(token);
-    console.log("Fetched activities:", activities);
+  const token = await getAccessToken();
+  const activities = await fetchActivities(token);
+  console.log(`📊 Fetched ${activities.length} activities from Strava`);
 
-  const results = activities.map((ride) => {
-    return {
-      id: ride.id,
-      title: ride.name,
-      date: ride.start_date,
-      blogUrl: `/rides/${slugify(ride.name)}`,
-      geojson: polylineToGeoJSON(ride.map.summary_polyline),
-    };
-  });
+  const results = activities
+    .filter(isRideWithGeojson)
+    .map((ride) => {
+      const slug = buildSlug(ride.name, ride.start_date);
+      return {
+        id: ride.id,
+        title: ride.name,
+        date: ride.start_date,
+        distance: ride.distance,
+        elevation: ride.total_elevation_gain,
+        duration: ride.moving_time,
+        blogUrl: slug,
+        geojson: polylineToGeoJSON(ride.map.summary_polyline),
+      };
+    });
 
-  fs.writeFileSync("./src/data/routes.json", JSON.stringify(results, null, 2));
-  console.log("✅ Synced Strava routes.");
+  console.log(`✅ Filtered to ${results.length} valid rides`);
+
+  // Ensure the data directory exists
+  const dataDir = "./src/data";
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+
+  fs.writeFileSync(
+    "./src/data/routes.json", 
+    JSON.stringify(results, null, 2)
+  );
+  console.log("✅ Synced Strava routes to src/data/routes.json");
 }
 
-function slugify(str) {
-  return str
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)+/g, "");
-}
-
-main();
+main().catch((error) => {
+  console.error("❌ Error syncing Strava routes:", error);
+  process.exit(1);
+});
