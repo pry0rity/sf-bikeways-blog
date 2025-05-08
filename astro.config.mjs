@@ -21,6 +21,7 @@ export default defineConfig({
       tracesSampleRate: 1.0,
       replaysSessionSampleRate: 0,
       replaysOnErrorSampleRate: 1.0,
+      debug: true,
       sourceMapsUploadOptions: {
         project: "pry0ritys-priorities",
         authToken: process.env.SENTRY_AUTH_TOKEN,
