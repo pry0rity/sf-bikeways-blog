@@ -25,6 +25,28 @@ const blogCollection = defineCollection({
   }),
 });
 
+const ridesCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.date(),
+    distance: z.number(),
+    elevation: z.number(),
+    duration: z.number(),
+    stravaId: z.string(),
+    geojson: z.object({
+      type: z.string(),
+      geometry: z.object({
+        type: z.string(),
+        coordinates: z.array(z.array(z.number())),
+      }),
+      properties: z.object({}),
+    }),
+  }),
+});
+
 export const collections = {
   'blog': blogCollection,
+  'rides': ridesCollection,
 }; 

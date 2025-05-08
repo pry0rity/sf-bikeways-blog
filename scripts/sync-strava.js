@@ -4,6 +4,7 @@ const require = createRequire(import.meta.url);
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 import slugify from "slugify";
+import path from "path";
 dotenv.config();
 
 const fs = require("fs");
@@ -57,7 +58,7 @@ function polylineToGeoJSON(encoded) {
 
 function buildSlug(title, date) {
   const shortDate = new Date(date).toISOString().split("T")[0]; // YYYY-MM-DD
-  return `/rides/${slugify(`${title} ${shortDate}`, { lower: true })}`;
+  return slugify(`${title} ${shortDate}`, { lower: true });
 }
 
 function isRideWithGeojson(activity) {
@@ -68,38 +69,85 @@ function isRideWithGeojson(activity) {
   );
 }
 
+function createMarkdownContent(ride) {
+  return `---
+title: "${ride.title}"
+description: "A ${(ride.distance / 1000).toFixed(1)}km ride with ${Math.round(ride.elevation)}m of elevation gain"
+date: ${ride.date}
+distance: ${ride.distance}
+elevation: ${ride.elevation}
+duration: ${ride.duration}
+stravaId: "${ride.id}"
+geojson: ${JSON.stringify(ride.geojson, null, 2)}
+---
+
+# ${ride.title}
+
+## Ride Details
+- Distance: ${(ride.distance / 1000).toFixed(1)}km
+- Elevation Gain: ${Math.round(ride.elevation)}m
+- Duration: ${Math.round(ride.duration / 60)} minutes
+
+## Route Map
+The route map will be displayed here.
+
+## Notes
+Add your ride notes and reflections here.
+`;
+}
+
 async function main() {
   const token = await getAccessToken();
   const activities = await fetchActivities(token);
   console.log(`📊 Fetched ${activities.length} activities from Strava`);
 
-  const results = activities
-    .filter(isRideWithGeojson)
-    .map((ride) => {
-      const slug = buildSlug(ride.name, ride.start_date);
-      return {
-        id: ride.id,
-        title: ride.name,
-        date: ride.start_date,
-        distance: ride.distance,
-        elevation: ride.total_elevation_gain,
-        duration: ride.moving_time,
-        blogUrl: slug,
-        geojson: polylineToGeoJSON(ride.map.summary_polyline),
-      };
+  const rides = activities.filter(isRideWithGeojson);
+  console.log(`✅ Filtered to ${rides.length} valid rides`);
+
+  // Ensure the rides directory exists
+  const ridesDir = "./src/content/rides";
+  if (!fs.existsSync(ridesDir)) {
+    fs.mkdirSync(ridesDir, { recursive: true });
+  }
+
+  // Create markdown files for each ride
+  for (const ride of rides) {
+    const slug = buildSlug(ride.name, ride.start_date);
+    const markdownContent = createMarkdownContent({
+      id: ride.id,
+      title: ride.name,
+      date: ride.start_date,
+      distance: ride.distance,
+      elevation: ride.total_elevation_gain,
+      duration: ride.moving_time,
+      geojson: polylineToGeoJSON(ride.map.summary_polyline),
     });
 
-  console.log(`✅ Filtered to ${results.length} valid rides`);
+    const filePath = path.join(ridesDir, `${slug}.md`);
+    fs.writeFileSync(filePath, markdownContent);
+    console.log(`✅ Created markdown file for ride: ${slug}`);
+  }
 
-  // Ensure the data directory exists
+  // Also save the routes data for the map
   const dataDir = "./public/data";
   if (!fs.existsSync(dataDir)) {
     fs.mkdirSync(dataDir, { recursive: true });
   }
 
+  const routesData = rides.map(ride => ({
+    id: ride.id,
+    title: ride.name,
+    date: ride.start_date,
+    distance: ride.distance,
+    elevation: ride.total_elevation_gain,
+    duration: ride.moving_time,
+    blogUrl: `/rides/${buildSlug(ride.name, ride.start_date)}`,
+    geojson: polylineToGeoJSON(ride.map.summary_polyline),
+  }));
+
   fs.writeFileSync(
     "./public/data/routes.json", 
-    JSON.stringify(results, null, 2)
+    JSON.stringify(routesData, null, 2)
   );
   console.log("✅ Synced Strava routes to public/data/routes.json");
 }
