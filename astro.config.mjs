@@ -6,15 +6,13 @@ import sitemap from '@astrojs/sitemap';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
+import sentry from '@sentry/astro';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://sf-bikeways-blog.vercel.app',
   output: 'static',
-  integrations: [
-    tailwind(),
-    mdx(),
-    sitemap(),
-  ],
+  integrations: [tailwind(), mdx(), sitemap(), sentry()],
   markdown: {
     shikiConfig: {
       theme: 'github-dark',
