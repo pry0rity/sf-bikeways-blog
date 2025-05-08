@@ -17,7 +17,7 @@ export default defineConfig({
     mdx(), 
     sitemap(),
     sentry({
-      dsn: "https://4f58a81083674ee22bbdae75891b0667@o4508695687725056.ingest.us.sentry.io/4509289396764672",
+      dsn: process.env.SENTRY_DSN,
       tracesSampleRate: 1.0,
       replaysSessionSampleRate: 0,
       replaysOnErrorSampleRate: 1.0,
