@@ -10,6 +10,9 @@ dotenv.config();
 const fs = require("fs");
 const polyline = require("@mapbox/polyline");
 
+const STRAVA_TOKEN_URL = "https://www.strava.com/oauth/token";
+const STRAVA_ACTIVITIES_URL = "https://www.strava.com/api/v3/athlete/activities";
+
 // Privacy zones to avoid (lat, lng)
 const PRIVACY_ZONES = [
   // Parse comma-separated coordinates from env vars
@@ -29,6 +32,7 @@ if (PRIVACY_ZONES.length === 0) {
 }
 
 const PRIVACY_RADIUS_KM = 0.48; // 3 blocks ≈ 0.48 km
+const MAX_OFFSET_KM = 0.1; // Maximum random offset in kilometers
 
 // Function to calculate distance between two coordinates in kilometers
 function calculateDistance(lat1, lon1, lat2, lon2) {
@@ -43,15 +47,32 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
-// Function to check if a coordinate is too close to any privacy zone
-function isNearPrivacyZone(lat, lng) {
-  return PRIVACY_ZONES.some(zone => 
-    calculateDistance(lat, lng, zone.lat, zone.lng) < PRIVACY_RADIUS_KM
-  );
+// Function to get the minimum distance to any privacy zone
+function getMinDistanceToPrivacyZones(lat, lng) {
+  return Math.min(...PRIVACY_ZONES.map(zone => 
+    calculateDistance(lat, lng, zone.lat, zone.lng)
+  ));
 }
 
-const STRAVA_TOKEN_URL = "https://www.strava.com/oauth/token";
-const STRAVA_ACTIVITIES_URL = "https://www.strava.com/api/v3/athlete/activities";
+// Function to add random offset to coordinates
+function addRandomOffset(lat, lng, distance) {
+  // Calculate how much to offset based on distance from privacy zone
+  // Closer points get more offset
+  const offsetFactor = Math.max(0, 1 - (distance / PRIVACY_RADIUS_KM));
+  const maxOffset = MAX_OFFSET_KM * offsetFactor;
+  
+  // Random angle in radians
+  const angle = Math.random() * 2 * Math.PI;
+  
+  // Convert offset from km to degrees (approximate)
+  const latOffset = (maxOffset * Math.cos(angle)) / 111.32; // 111.32 km per degree of latitude
+  const lngOffset = (maxOffset * Math.sin(angle)) / (111.32 * Math.cos(lat * Math.PI / 180));
+  
+  return {
+    lat: lat + latOffset,
+    lng: lng + lngOffset
+  };
+}
 
 async function getAccessToken() {
   const res = await fetch(STRAVA_TOKEN_URL, {
@@ -86,14 +107,25 @@ async function fetchActivities(token) {
 
 function polylineToGeoJSON(encoded) {
   const coords = polyline.decode(encoded);
-  // Filter out coordinates near privacy zones
-  const filteredCoords = coords.filter(([lat, lng]) => !isNearPrivacyZone(lat, lng));
+  
+  // Process coordinates with random offsets near privacy zones
+  const processedCoords = coords.map(([lat, lng]) => {
+    const distance = getMinDistanceToPrivacyZones(lat, lng);
+    
+    if (distance < PRIVACY_RADIUS_KM) {
+      // Add random offset to coordinates near privacy zones
+      const { lat: newLat, lng: newLng } = addRandomOffset(lat, lng, distance);
+      return [newLng, newLat]; // GeoJSON = [lng, lat]
+    }
+    
+    return [lng, lat]; // No offset needed
+  });
   
   return {
     type: "Feature",
     geometry: {
       type: "LineString",
-      coordinates: filteredCoords.map(([lat, lng]) => [lng, lat]), // GeoJSON = [lng, lat]
+      coordinates: processedCoords,
     },
     properties: {},
   };
