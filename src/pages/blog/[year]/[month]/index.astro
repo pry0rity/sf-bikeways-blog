@@ -1,0 +1,96 @@
+---
+import Layout from "../../../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  const seen = new Set();
+  return posts
+    .map((post) => {
+      const date = new Date(post.data.date);
+      const year = date.getFullYear().toString();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const key = `${year}-${month}`;
+      if (seen.has(key)) return null;
+      seen.add(key);
+      return { params: { year, month } };
+    })
+    .filter(Boolean);
+}
+
+const { year, month } = Astro.params;
+const posts = await getCollection("blog");
+
+// Filter posts for the given year and month
+const filteredPosts = posts.filter((post) => {
+  const date = new Date(post.data.date);
+  const postYear = date.getFullYear().toString();
+  const postMonth = String(date.getMonth() + 1).padStart(2, "0");
+  return postYear === year && postMonth === month;
+});
+
+const monthName =
+  filteredPosts.length > 0
+    ? new Date(filteredPosts[0].data.date).toLocaleString("default", {
+        month: "long",
+      })
+    : month;
+---
+
+<Layout title={`Blog | ${monthName} ${year}`}>
+  <div class="space-y-16">
+    <section class="space-y-4">
+      <h1>Blog: {monthName} {year}</h1>
+      <p class="text-[var(--color-text)]/60">
+        All posts from {monthName}
+        {year}.
+      </p>
+    </section>
+
+    <section class="space-y-12">
+      {
+        filteredPosts.length === 0 && (
+          <p class="text-[var(--color-text)]/60">
+            No posts found for this month.
+          </p>
+        )
+      }
+      {
+        filteredPosts.map((post) => (
+          <article class="group">
+            <a
+              href={`/blog/${year}/${month}/${post.slug}`}
+              class="block space-y-3"
+            >
+              <div class="space-y-1">
+                <h2 class="link-hover inline-block">{post.data.title}</h2>
+                <p class="text-[var(--color-text)]/60 leading-relaxed">
+                  {post.data.description}
+                </p>
+              </div>
+              <div class="flex items-center gap-4 text-sm text-[var(--color-text)]/40">
+                <time>
+                  {new Date(post.data.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <span class="flex gap-2">
+                    {post.data.tags.map((tag) => (
+                      <span class="inline-block rounded-full bg-gray-100 dark:bg-gray-800 px-2 py-0.5 text-xs font-medium text-[var(--color-text)]">
+                        {tag}
+                      </span>
+                    ))}
+                  </span>
+                )}
+              </div>
+            </a>
+          </article>
+        ))
+      }
+    </section>
+  </div>
+</Layout>

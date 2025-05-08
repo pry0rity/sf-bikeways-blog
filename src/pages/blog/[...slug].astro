@@ -1,65 +1,84 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.id.replace(/^blog\//, '').replace(/\.md$/, '') },
-    props: { post }
-  }));
+  const posts = await getCollection("blog");
+  return posts.map((post) => {
+    const date = new Date(post.data.date);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    return {
+      params: { slug: `${year}/${month}/${post.slug}` },
+      props: { post },
+    };
+  });
 }
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+const date = new Date(post.data.date);
+const year = date.getFullYear();
+const month = date.toLocaleString("default", { month: "long" });
 ---
 
 <Layout title={post.data.title}>
-  <article class="prose dark:prose-invert max-w-none">
-    <header class="mb-8">
-      <!-- <h1 class="text-3xl font-medium mb-4">{post.data.title}</h1> -->
-      <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
-        {post.data.description}
-      </p>
-      <div class="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
-        <time datetime={post.data.date.toISOString()}>
-          {post.data.date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}
+  <article class="space-y-8">
+    <header class="space-y-4">
+      <h1>{post.data.title}</h1>
+      {
+        post.data.description && (
+          <p class="text-lg text-[var(--color-text)]/80">
+            {post.data.description}
+          </p>
+        )
+      }
+      <nav class="text-sm text-[var(--color-text)]/60">
+        <ol class="flex gap-2">
+          <li><a href="/blog" class="link-hover">Blog</a></li>
+          <li>/</li>
+          <li><a href={`/blog/${year}`} class="link-hover">{year}</a></li>
+          <li>/</li>
+          <li>
+            <a
+              href={`/blog/${year}/${String(date.getMonth() + 1).padStart(2, "0")}`}
+              class="link-hover">{month}</a
+            >
+          </li>
+          <li>/</li>
+          <li class="text-[var(--color-text)]">{post.data.title}</li>
+        </ol>
+      </nav>
+      <div class="flex items-center gap-4 text-sm text-[var(--color-text)]/60">
+        <time>
+          {
+            date.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }
         </time>
-        {post.data.location && (
-          <span>📍 {post.data.location}</span>
-        )}
-        {post.data.weather && (
-          <span>🌤️ {post.data.weather}</span>
-        )}
-      </div>
-      {post.data.tags && post.data.tags.length > 0 && (
-        <div class="flex flex-wrap gap-2 mt-4">
-          {post.data.tags.map((tag: string) => (
-            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-sm">
-              {tag}
+        {
+          post.data.tags && post.data.tags.length > 0 && (
+            <span class="flex gap-2">
+              {post.data.tags.map((tag) => (
+                <span class="inline-block rounded-full bg-gray-100 dark:bg-gray-800 px-2 py-0.5 text-xs font-medium text-[var(--color-text)]">
+                  {tag}
+                </span>
+              ))}
             </span>
-          ))}
-        </div>
-      )}
+          )
+        }
+        {post.data.location && <span>📍 {post.data.location}</span>}
+        {post.data.weather && <span>🌤️ {post.data.weather}</span>}
+      </div>
     </header>
-    <hr class="my-8 border-t border-[var(--color-text)]/10" />
-    <div class="prose-lg">
+
+    <div class="prose">
       <Content />
     </div>
-
-    {post.data.coordinates && (
-      <div class="mt-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-        <h2 class="text-lg font-medium mb-4">Ride Location</h2>
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-          Coordinates: {post.data.coordinates.lat}, {post.data.coordinates.lng}
-        </p>
-        {/* Map will be added here in a future update */}
-      </div>
-    )}
   </article>
 </Layout>
 
@@ -74,4 +93,4 @@ const { Content } = await post.render();
   :global(.prose p) {
     margin-bottom: 1.5em;
   }
-</style> 
+</style>

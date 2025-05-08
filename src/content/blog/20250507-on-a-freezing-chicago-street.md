@@ -7,11 +7,10 @@ location: "North Beach"
 coffeeShop: "Beacon"
 weather: "Moonlight, 55°F"
 ---
-# on a freezing chicago street
 
 Two years ago, I nearly died.
 
-There was no bright light. No revelation. Just a suffocating pressure on my head and the sterile rhythm of a machine breathing for me. I was lying in an ICU bed in Chicago, fully conscious, and thinking: *If no one had called the ambulance, who would have died?*
+There was no bright light. No revelation. Just a suffocating pressure on my head and the sterile rhythm of a machine breathing for me. I was lying in an ICU bed in Chicago, fully conscious, and thinking: _If no one had called the ambulance, who would have died?_
 
 The answer was obvious - and terrifying. It was me. But not just the version of me in that bed. It was the version of me I used to be.
 
@@ -71,4 +70,4 @@ Now? I’m ready to build something instead.
 
 This isn’t a rebrand. It’s not some productivity hack or curated journey.
 
-It’s just me, finally choosing to stop pressing tab - and write the line by hand. 
+It’s just me, finally choosing to stop pressing tab - and write the line by hand.

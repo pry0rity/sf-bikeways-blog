@@ -1,54 +1,105 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="About SF Bikeways" description="Discovering San Francisco's bike infrastructure, one ride at a time.">
-  <div class="space-y-24">
-    <section class="space-y-6">
-      <div class="space-y-2">
-        <h1 class="text-3xl font-medium">About SF Bikeways</h1>
-        <p class="text-[var(--color-text)]/80 text-lg">
-          Welcome to SF Bikeways, your guide to exploring San Francisco by bicycle. This blog is dedicated to documenting and celebrating the city's bike infrastructure, from the famous Wiggle to hidden neighborhood routes.
-        </p>
-      </div>
-    </section>
+<Layout
+  title="About SF Bikeways"
+  description="One person's mission to bike every lane in San Francisco."
+>
+  <div class="max-w-2xl mx-auto space-y-8">
+    <h1>About SF Bikeways</h1>
 
-    <section class="space-y-8">
-      <div class="flex items-center gap-4">
-        <h2 class="text-lg font-medium">Our Mission</h2>
-        <div class="h-px flex-1 bg-[var(--color-text)]/10"></div>
-      </div>
-      <p class="text-[var(--color-text)]/60 leading-relaxed">
-        We believe that cycling is more than just a mode of transportation—it's a way to experience the city's unique character, connect with local communities, and discover hidden gems that you might miss when traveling by car. Through detailed route reviews, coffee shop recommendations, and gear insights, we aim to make cycling in San Francisco more accessible and enjoyable for everyone.
-      </p>
-    </section>
+    <p>
+      I'm biking every single bike lane in San Francisco. No exceptions, no
+      shortcuts.
+    </p>
 
-    <section class="space-y-8">
-      <div class="flex items-center gap-4">
-        <h2 class="text-lg font-medium">What We Cover</h2>
-        <div class="h-px flex-1 bg-[var(--color-text)]/10"></div>
-      </div>
-      <ul class="space-y-2 text-[var(--color-text)]/60">
-        <li><strong>Route Reviews</strong>: Detailed explorations of San Francisco's bike lanes and paths</li>
-        <li><strong>Coffee Shop Stops</strong>: Reviews of bike-friendly cafes and coffee shops</li>
-        <li><strong>Gear Reviews</strong>: Insights on bikes, accessories, and photography equipment</li>
-        <li><strong>Infrastructure Updates</strong>: News about new bike lanes and improvements</li>
-        <li><strong>Local Cycling Events</strong>: Coverage of community rides and cycling events</li>
-      </ul>
-    </section>
+    <p>
+      This started as a way to break out of autopilot mode. Instead of chasing
+      the next big thing, I'm exploring the city I already love - one lane at a
+      time.
+    </p>
 
-    <section class="space-y-8">
-      <div class="flex items-center gap-4">
-        <h2 class="text-lg font-medium">Join the Journey</h2>
-        <div class="h-px flex-1 bg-[var(--color-text)]/10"></div>
-      </div>
-      <p class="text-[var(--color-text)]/60 leading-relaxed">
-        Whether you're a seasoned cyclist or just getting started, we invite you to join us in exploring San Francisco's bike infrastructure. Follow along as we document our rides, share our experiences, and help build a more bike-friendly city.
-      </p>
-      <p class="text-[var(--color-text)]/60 leading-relaxed">
-        Feel free to reach out with route suggestions, coffee shop recommendations, or just to say hello!
-      </p>
-      
-    </section>
+    <p>
+      You'll find photos, stories, and coffee shop stops along the way. No gear
+      reviews, no productivity hacks. Just raw documentation of what it's like
+      to see San Francisco from every possible angle on two wheels.
+    </p>
+
+    <p>
+      Want to follow along? I'm documenting the whole thing here. Have a
+      favorite lane or coffee shop to recommend? Drop me a line.
+    </p>
+
+    <div class="mt-12 p-6 bg-gray-50 rounded-lg">
+      <h2 class="text-xl font-semibold mb-4">Get in Touch</h2>
+      <form id="contact-form" class="space-y-4">
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700"
+            >Email</label
+          >
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          />
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-700"
+            >Message</label
+          >
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            required
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        >
+          Send Message
+        </button>
+      </form>
+      <div id="form-status" class="mt-4 hidden"></div>
+    </div>
   </div>
-</Layout> 
+</Layout>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const status = document.getElementById("form-status") as HTMLDivElement;
+
+  if (form && status) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          status.textContent = "Message sent successfully!";
+          status.className = "mt-4 text-green-600";
+          form.reset();
+        } else {
+          throw new Error("Failed to send message");
+        }
+      } catch (error) {
+        status.textContent = "Failed to send message. Please try again.";
+        status.className = "mt-4 text-red-600";
+      }
+
+      status.classList.remove("hidden");
+    });
+  }
+</script>

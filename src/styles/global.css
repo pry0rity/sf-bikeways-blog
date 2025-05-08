@@ -72,16 +72,21 @@
     border-radius: 0.2em;
     transition: color 0.3s ease;
     isolation: isolate;
+    overflow: hidden;
   }
 
   .link-hover::before {
     content: '';
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: var(--color-accent);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;
     z-index: -1;
     border-radius: 0.2em;
   }
@@ -92,6 +97,7 @@
 
   .link-hover:hover::before {
     transform: scaleX(1);
+    opacity: 1;
   }
 }
 
@@ -117,4 +123,48 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent-hover);
+}
+
+.prose, .prose p, .prose li, .prose span, .prose strong, .prose em,
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  color: var(--color-text) !important;
+}
+
+/* Make heading anchors in .prose use the same accent animated background as .link-hover */
+.prose :is(h1, h2, h3, h4, h5, h6) > a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--color-text);
+  padding: 0.1em 0.2em;
+  margin: -0.1em -0.2em;
+  border-radius: 0.2em;
+  transition: color 0.3s ease;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.prose :is(h1, h2, h3, h4, h5, h6) > a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;
+  z-index: -1;
+  border-radius: 0.2em;
+}
+
+.prose :is(h1, h2, h3, h4, h5, h6) > a:hover::before {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+.prose :is(h1, h2, h3, h4, h5, h6) > a:focus-visible::after {
+  transform: scaleX(1);
 } 
