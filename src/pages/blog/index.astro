@@ -60,7 +60,7 @@ const groupedPosts = sortedPosts.reduce<GroupedPosts>((acc, post) => {
                 </div>
 
                 <div class="space-y-12">
-                  {posts.map((post) => (
+                  {(posts as CollectionEntry<"blog">[]).map((post) => (
                     <article class="group">
                       <a
                         href={`/blog/${year}/${String(new Date(post.data.date).getMonth() + 1).padStart(2, "0")}/${post.slug}`}
