@@ -81,8 +81,6 @@ stravaId: "${ride.id}"
 geojson: ${JSON.stringify(ride.geojson, null, 2)}
 ---
 
-# ${ride.title}
-
 ## Ride Details
 - Distance: ${(ride.distance / 1000).toFixed(1)}km
 - Elevation Gain: ${Math.round(ride.elevation)}m

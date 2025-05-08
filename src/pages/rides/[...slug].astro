@@ -22,7 +22,7 @@ const { Content } = await ride.render();
 <Layout title={ride.data.title}>
   <article class="prose dark:prose-invert max-w-none">
     <header class="mb-8">
-      <h1 class="text-3xl font-medium mb-4">{ride.data.title}</h1>
+      <!-- <h1 class="text-3xl font-medium mb-4">{ride.data.title}</h1> -->
       <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
         {ride.data.description}
       </p>
@@ -103,12 +103,6 @@ const { Content } = await ride.render();
   }
   :global(.prose img) {
     border-radius: 0.5rem;
-  }
-  :global(.prose h2) {
-    margin-top: 2em;
-    margin-bottom: 1em;
-    font-weight: 500;
-    font-size: 1.125rem; /* text-lg */
   }
   :global(.prose p) {
     margin-bottom: 1.5em;

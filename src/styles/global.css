@@ -26,10 +26,33 @@
     letter-spacing: 0.01em;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Clash Grotesk', var(--font-sans);
-    font-weight: 600;
-    letter-spacing: 0.01em;
+  /* Simplified heading hierarchy */
+  h1, .prose h1 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  h2, .prose h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 1.25rem;
+  }
+
+  h3, .prose h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+  }
+
+  h4, h5, h6, .prose h4, .prose h5, .prose h6 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
   }
 
   body {
