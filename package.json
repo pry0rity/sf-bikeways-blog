@@ -21,12 +21,12 @@
     "polyline": "^0.2.0",
     "sharp": "^0.34.1",
     "slugify": "^1.6.6",
+    "tailwindcss": "^3.4.0",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^6.0.2",
     "@tailwindcss/typography": "^0.5.16",
-    "@types/leaflet": "^1.9.17",
-    "tailwindcss": "^4.1.5"
+    "@types/leaflet": "^1.9.17"
   }
 }
