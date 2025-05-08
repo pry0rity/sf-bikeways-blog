@@ -85,7 +85,14 @@ const sortedPosts = posts.sort(
       </div>
 
       <div class="rounded-lg overflow-hidden">
-        <div id="spotify-placeholder" class="spotify-skeleton-loader"></div>
+        <iframe
+          src="https://open.spotify.com/embed/album/3hXswlXaEoYMiBQ9TZN2wR"
+          width="100%"
+          height="352"
+          frameborder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          class="rounded-lg"></iframe>
       </div>
 
       <div class="space-y-4">
@@ -107,33 +114,6 @@ const sortedPosts = posts.sort(
     error.stack = error.stack?.replace(/Error:/, "TestError:");
     throw error;
   });
-
-  // Lazy load Spotify iframe
-  const placeholder = document.getElementById("spotify-placeholder");
-  if (placeholder && "IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const iframe = document.createElement("iframe");
-            iframe.src =
-              "https://open.spotify.com/embed/album/3hXswlXaEoYMiBQ9TZN2wR";
-            iframe.width = "100%";
-            iframe.height = "352";
-            iframe.frameBorder = "0";
-            iframe.allow =
-              "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
-            iframe.loading = "lazy";
-            iframe.className = "rounded-lg";
-            placeholder.replaceWith(iframe);
-            obs.disconnect();
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(placeholder);
-  }
 </script>
 
 <style>
@@ -145,24 +125,5 @@ const sortedPosts = posts.sort(
       color-mix(in srgb, var(--color-accent) 2%, var(--color-bg))
     );
     background-attachment: fixed;
-  }
-
-  .spotify-skeleton-loader {
-    width: 100%;
-    height: 352px;
-    background: #e5e7eb;
-    border-radius: 0.5rem;
-    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    display: block;
-  }
-
-  @keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.4;
-    }
   }
 </style>
