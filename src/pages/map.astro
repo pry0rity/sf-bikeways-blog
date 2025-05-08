@@ -1,16 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Map from '../components/Map.astro';
+import MapComponent from '../components/Map.astro';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
+// Define the type for a route
+type Route = {
+  id: number;
+  title: string;
+  date: string;
+  distance: number;
+  elevation: number;
+  duration: number;
+  blogUrl: string;
+  geojson: {
+    type: string;
+    geometry: {
+      type: string;
+      coordinates: number[][];
+    };
+    properties: Record<string, unknown>;
+  };
+};
+
 // Load routes data
 const routesFile = join(process.cwd(), 'src', 'data', 'routes.json');
-const routes = JSON.parse(readFileSync(routesFile, 'utf-8'));
+const routes: Route[] = JSON.parse(readFileSync(routesFile, 'utf-8'));
 
 // Calculate some stats
-const totalDistance = routes.reduce((sum, route) => sum + route.distance, 0) / 1000; // km
-const totalElevation = routes.reduce((sum, route) => sum + route.elevation, 0); // meters
+const totalDistance = routes.reduce((sum: number, route: Route) => sum + route.distance, 0) / 1000; // km
+const totalElevation = routes.reduce((sum: number, route: Route) => sum + route.elevation, 0); // meters
 const totalRides = routes.length;
 ---
 
@@ -39,13 +58,13 @@ const totalRides = routes.length;
     </div>
 
     <div class="rounded-lg overflow-hidden border border-[var(--color-text)]/10">
-      <Map height="600px" />
+      <MapComponent height="600px" />
     </div>
 
     <section class="space-y-4">
       <h2 class="text-xl font-medium">Recent Rides</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {routes.slice(0, 6).map(route => (
+        {routes.slice(0, 6).map((route: Route) => (
           <a 
             href={route.blogUrl}
             class="p-4 rounded-lg border border-[var(--color-text)]/10 hover:border-[var(--color-text)]/20 transition-colors"
@@ -62,4 +81,4 @@ const totalRides = routes.length;
       </div>
     </section>
   </div>
-</Layout> 
+</Layout>
