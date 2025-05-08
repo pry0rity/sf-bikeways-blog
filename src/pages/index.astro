@@ -109,9 +109,12 @@ const sortedPosts = posts.sort(
 
 <script>
   document.getElementById("errorButton")?.addEventListener("click", () => {
-    throw new Error(
+    const error = new Error(
       `Test error from pryority's blog at ${new Date().toISOString()}`
     );
+    error.name = "TestError";
+    error.stack = error.stack?.replace(/Error:/, "TestError:");
+    throw error;
   });
 </script>
 

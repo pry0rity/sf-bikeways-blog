@@ -28,6 +28,20 @@ export default defineConfig({
       },
     })
   ],
+  vite: {
+    server: {
+      headers: {
+        'Content-Security-Policy': `
+          default-src 'self';
+          script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.sentry.io;
+          connect-src 'self' https://*.sentry.io;
+          img-src 'self' data: https://*.sentry.io;
+          style-src 'self' 'unsafe-inline';
+          frame-src 'self' https://open.spotify.com;
+        `.replace(/\s+/g, ' ').trim()
+      }
+    }
+  },
   markdown: {
     shikiConfig: {
       theme: 'github-dark',
