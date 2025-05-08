@@ -2,11 +2,41 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import MapComponent from "../components/Map.astro";
+import { readFileSync } from "fs";
+import { join } from "path";
 
+// Load blog posts
 const posts = await getCollection("blog");
 const sortedPosts = posts.sort(
   (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
     new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+// Define the type for a route
+type Route = {
+  id: number;
+  title: string;
+  date: string;
+  distance: number;
+  elevation: number;
+  duration: number;
+  blogUrl: string;
+  geojson: {
+    type: string;
+    geometry: {
+      type: string;
+      coordinates: number[][];
+    };
+    properties: Record<string, unknown>;
+  };
+};
+
+// Load routes data
+const routesFile = join(process.cwd(), "src", "data", "routes.json");
+const routes: Route[] = JSON.parse(readFileSync(routesFile, "utf-8"));
+const sortedRoutes = routes.sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
 );
 ---
 
@@ -36,13 +66,13 @@ const sortedPosts = posts.sort(
 
     <section class="space-y-8">
       <div class="flex items-center gap-4">
-        <h2>latest thoughts</h2>
+        <h2><a href="/blog" class="link-hover">latest thoughts</a></h2>
         <div class="h-px flex-1 bg-[var(--color-text)]/10"></div>
       </div>
 
       <div class="space-y-16">
         {
-          sortedPosts.map((post) => (
+          sortedPosts.slice(0, 3).map((post) => (
             <article class="group">
               <a href={`/blog/${post.slug}`} class="block space-y-3">
                 <div class="space-y-1">
@@ -75,16 +105,65 @@ const sortedPosts = posts.sort(
       </div>
     </section>
 
-    <section class="space-y-6">
-      <div class="space-y-4 text-[var(--color-text)]/60 text-sm">
-        <p class="flex items-center gap-2">
-          currently reading: <span class="link-hover"
-            >The Design of Everyday Things</span
-          >
-        </p>
+    <section class="space-y-8">
+      <div class="flex items-center gap-4">
+        <h2><a href="/map" class="link-hover">latest rides</a></h2>
+        <div class="h-px flex-1 bg-[var(--color-text)]/10"></div>
       </div>
 
-      <div class="rounded-lg overflow-hidden">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {
+          sortedRoutes.slice(0, 3).map((route: Route) => (
+            <a
+              href={route.blogUrl}
+              class="p-4 rounded-lg border border-[var(--color-text)]/10 hover:border-[var(--color-text)]/20 transition-colors route-card"
+              data-route-id={route.id}
+            >
+              <h3 class="link-hover inline-block">{route.title}</h3>
+              <p class="text-sm text-[var(--color-text)]/60 mt-1">
+                {(route.distance / 1000).toFixed(1)}km •{" "}
+                {Math.round(route.elevation)}m elevation
+              </p>
+              <p class="text-sm text-[var(--color-text)]/60">
+                {new Date(route.date).toLocaleDateString()}
+              </p>
+            </a>
+          ))
+        }
+      </div>
+
+      <div
+        class="rounded-lg overflow-hidden border border-[var(--color-text)]/10"
+      >
+        <MapComponent height="400px" />
+      </div>
+    </section>
+
+    <section class="space-y-8">
+      <div class="flex items-center gap-4">
+        <h2>current inspo</h2>
+        <div class="h-px flex-1 bg-[var(--color-text)]/10"></div>
+      </div>
+      <!-- Currently Reading -->
+      <div class="flex gap-4 items-start bg-white/80 rounded-lg shadow-sm p-6">
+        <img
+          src="https://m.media-amazon.com/images/I/41BgyERNZHL._SY445_SX342_PQ67_.jpg"
+          alt="The Design of Everyday Things book cover"
+          class="w-24 h-36 object-cover rounded-md shadow"
+          loading="lazy"
+        />
+        <div class="flex-1 space-y-2">
+          <h3 class="font-semibold text-lg">The Design of Everyday Things</h3>
+          <p class="text-sm text-[var(--color-text)]/60 mb-1">by Don Norman</p>
+          <p class="text-sm text-[var(--color-text)]/80">
+            A fascinating exploration of how design affects our daily lives and
+            why some products satisfy customers while others only frustrate
+            them.
+          </p>
+        </div>
+      </div>
+      <!-- Currently Listening -->
+      <div class="bg-white/80 rounded-lg shadow-sm p-4">
         <iframe
           src="https://open.spotify.com/embed/album/3hXswlXaEoYMiBQ9TZN2wR"
           width="100%"
@@ -94,7 +173,6 @@ const sortedPosts = posts.sort(
           loading="lazy"
           class="rounded-lg"></iframe>
       </div>
-
       <div class="space-y-4">
         <button
           id="errorButton"
@@ -113,6 +191,25 @@ const sortedPosts = posts.sort(
     error.name = "TestError";
     error.stack = error.stack?.replace(/Error:/, "TestError:");
     throw error;
+  });
+
+  // Add hover event listeners to route cards
+  document.querySelectorAll(".route-card").forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      const routeId = parseInt(card.getAttribute("data-route-id") || "0");
+      const event = new CustomEvent("routeCardHover", {
+        detail: { routeId, isHovering: true },
+      });
+      document.dispatchEvent(event);
+    });
+
+    card.addEventListener("mouseleave", () => {
+      const routeId = parseInt(card.getAttribute("data-route-id") || "0");
+      const event = new CustomEvent("routeCardHover", {
+        detail: { routeId, isHovering: false },
+      });
+      document.dispatchEvent(event);
+    });
   });
 </script>
 
