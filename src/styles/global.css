@@ -9,6 +9,7 @@
     --color-text: #1a1a1a;
     --color-accent: #008000;
     --color-accent-hover: #006400;
+    --transition-duration: 0.3s;
   }
 
   .dark {
@@ -24,6 +25,8 @@
     background-color: var(--color-bg);
     color: var(--color-text);
     letter-spacing: 0.01em;
+    transition: background-color var(--transition-duration) ease,
+                color var(--transition-duration) ease;
   }
 
   /* Simplified heading hierarchy */

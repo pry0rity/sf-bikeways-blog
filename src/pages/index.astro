@@ -74,7 +74,10 @@ const sortedRoutes = routes.sort(
         {
           sortedPosts.slice(0, 3).map((post) => (
             <article class="group">
-              <a href={`/blog/${post.slug}`} class="block space-y-3">
+              <a
+                href={`/blog/${new Date(post.data.date).getFullYear()}/${String(new Date(post.data.date).getMonth() + 1).padStart(2, "0")}/${post.slug}`}
+                class="block space-y-3"
+              >
                 <div class="space-y-1">
                   <h3 class="link-hover inline-block">{post.data.title}</h3>
                   <p class="text-[var(--color-text)]/60 leading-relaxed">
@@ -172,14 +175,6 @@ const sortedRoutes = routes.sort(
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
           class="rounded-lg"></iframe>
-      </div>
-      <div class="space-y-4">
-        <button
-          id="errorButton"
-          class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
-        >
-          Trigger Test Error
-        </button>
       </div>
     </section>
   </div>
