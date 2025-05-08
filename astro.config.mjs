@@ -23,7 +23,7 @@ export default defineConfig({
       replaysOnErrorSampleRate: 1.0,
       debug: true,
       sourceMapsUploadOptions: {
-        project: "pry0ritys-priorities",
+        project: "javascript-astro",
         authToken: process.env.SENTRY_AUTH_TOKEN,
       },
     })
