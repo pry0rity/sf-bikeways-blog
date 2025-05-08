@@ -1,8 +1,8 @@
 ---
 title: "on a freezing chicago street"
-description: "I nearly died, got bored, and decided to actually try. This is that story."
+description: "In which I nearly died, got bored, and decided to actually try."
 date: 2025-05-07
-tags: ["git reset --hard", "career"]
+tags: ["career"]
 location: "North Beach"
 coffeeShop: "Beacon"
 weather: "Moonlight, 55°F"
@@ -71,6 +71,4 @@ Now? I’m ready to build something instead.
 
 This isn’t a rebrand. It’s not some productivity hack or curated journey.
 
-It’s just me, finally choosing to stop pressing Tab.
-
-**Time to write the whole damn line.**
+It’s just me, finally choosing to stop pressing tab - and write the line by hand. 
