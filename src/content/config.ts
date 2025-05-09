@@ -13,6 +13,8 @@ const blogCollection = defineCollection({
     routeName: z.string().optional(),
     bikeType: z.string().optional(),
     weather: z.string().optional(),
+    musicTitle: z.string().optional(),
+    musicUrl: z.string().optional(),
     gear: z.object({
       camera: z.string().optional(),
       bike: z.string().optional(),

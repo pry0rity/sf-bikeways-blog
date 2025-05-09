@@ -74,6 +74,11 @@ const month = date.toLocaleString("default", { month: "long" });
         {post.data.location && <span>📍 {post.data.location}</span>}
         {post.data.weather && <span>🌤️ {post.data.weather}</span>}
       </div>
+      {post.data.musicTitle && post.data.musicUrl && (
+        <div class="music-block text-sm text-[var(--color-text)]/60">
+          <span role="img" aria-label="music">🎵</span> <a href={post.data.musicUrl} target="_blank" rel="noopener">{post.data.musicTitle}</a>
+        </div>
+      )}
     </header>
 
     <div class="prose">
@@ -92,5 +97,12 @@ const month = date.toLocaleString("default", { month: "long" });
   }
   :global(.prose p) {
     margin-bottom: 1.5em;
+    letter-spacing: 0.03em;
+  }
+  .music-block {
+    margin: 1.5em 0 1.5em 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
   }
 </style>

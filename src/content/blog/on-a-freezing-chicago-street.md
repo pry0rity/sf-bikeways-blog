@@ -1,73 +1,97 @@
 ---
 title: "on a freezing chicago street"
 description: "In which I nearly died, got bored, and decided to actually try."
-date: 2025-05-07
 tags: ["career"]
+date: 2025-05-07
 location: "North Beach"
 coffeeShop: "Beacon"
 weather: "Moonlight, 55°F"
+musicTitle: "margot & the nuclear so and so's"
+musicUrl: "https://www.youtube.com/watch?v=UJrhm2Q68fg"
 ---
 
-Two years ago, I nearly died.
+Two years ago, I almost died.
 
-There was no bright light. No revelation. Just a suffocating pressure on my head and the sterile rhythm of a machine breathing for me. I was lying in an ICU bed in Chicago, fully conscious, and thinking: _If no one had called the ambulance, who would have died?_
+They say you can 'see' the other side - not me. Just... pressure. This awful, compressing pressure in my head, like someone vacuum-packed my brain. I was lying eyes open in an ICU bed, fully conscious of the machine breathing for me, and all I could think was:
 
-The answer was obvious - and terrifying. It was me. But not just the version of me in that bed. It was the version of me I used to be.
+*If no one had called the ambulance, who even would've died?*
 
-## default mode
+Because the person in the bed didn't feel like me. Not really. Just... some guy. Some burnt-out, slightly bloated version of me I didn't recognize.
 
-Eight years earlier, I was relentless. In college, I made challenges for fun. Engineering classes were a launchpad for business ideas. Clubs were experiments in rethinking how the world worked. Nobody set the bar for me. I built it and cleared it myself.
+## the good life™ was quietly killing me
 
-But by the time I landed in that hospital bed, I’d stopped doing that. I was living life in “default mode.”
+On the surface, nothing was wrong. I had a cushy 9-5 that I could realistically finish from 10-3. I had friends, a social calendar, money to burn on things I didn't need. It was easy. Kind of fun, even.
 
-Like pressing tab in Cursor, letting autofill just guess at what's next.
+But underneath that? Meh. 
 
-Things weren’t bad, objectively. I had a well-paying 9–5 that I could crush in five hours. A lively SF social life. More than enough income to live outside my means. But I was numb. Checking off all the right boxes and feeling absolutely nothing.
+Nothing was on fire, but everything felt fake. Or flat. Like I was acting out a decent impression of a happy person.
 
-Back home, I opened my career planning doc. At the top of the page:
+## vibe coding through life
 
-**"L4 – Lead ⭐"**
+3 days in the ICU and 4 days on a couch later, I finally made it on a plane. 
 
-It hit me like a punch. I wasn’t living like this by accident. I was addicted to exceeding expectations. I was manufacturing wins by lowering the bar for myself and scoring quick hits from others. And it worked, until it didn’t.
+I pulled up my activation-locked macbook pro and opened my shiny official Career Planning doc in Notion. No idea why. Morbid curiosity, maybe.
 
-## lowering the bar
+First line:
 
-I've taken every job a recruiter handed me. If someone laid out a neat little problem - slide deck, PRD, campaign - I could crush it. The bar was set. I could jump over it, impress a few people, and rack up the dopamine.
+**L4 – Lead ⭐**
 
-Professionally, I made a habit of bottlenecking myself just enough to look scrappy. I could beat the goal, look like a hero, and bunny hop my way up the ladder.
+**That smug little bastard hit me harder than the morphine drip.** 
 
-Socially, it was the same playbook. Parties, kickball leagues, surface-level momentum. Nothing bad, but nothing challenging either. I’d stopped pushing myself in the ways that used to make me feel alive.
+Oh yeah? You wanna be a *star student?* That's what you're pushing for, the thing that'll make you feel satisfied? 
 
-Everywhere I looked, I was chasing the short-term hit of winning at someone else’s game. And deep down, I knew it.
+Would the EMTs have cared that I crushed my quarterly webinar metrics? Would anyone? *Dude*. 
 
-## changing my settings
+It hit me all at once: the dissociation, the emptiness, the sense of being stuck. I wasn't doing anything meaningful, I was just chasing the smallest possible wins. Low-effort, low-stakes dopamine. Ship the deck. Hit the number. Get the Slack emoji. Repeat.
 
-When I got back to San Francisco, I unraveled. Told my team I was moving to New York. Told my partner the same. Cleaned my apartment, trashed old clothes, rearranged my life like it was a crime scene.
+College me would've punched me in the throat.
 
-And then I stopped.
+That guy was *feral*. He built weird stuff for no reason. Took on dumb projects just to see if he could do them. Said no when everyone said yes. Stayed up all night over ideas that didn't matter to anyone but him.
 
-Because the problem wasn’t SF vs. New York. It wasn't my LinkedIn. It wasn’t my friends.
+Now? I was "delivering cross-functional value." I was a walking, talking SMART goal. 
 
-It was systemic. I didn’t need to change the backdrop - I needed to start writing the script.
+## the fake escape plan
 
-## what now
+So I did what any rational person having a quarter-life identity crisis would do:
 
-Two years and two jobs later, I’m finally starting to feel like myself again. I just accepted another role - yes, through a recruiter - but this time because it’s a zero-to-one challenge. No one to impress but me.
+– Told everyone I was moving to New York  
+– Told my amazing, patient partner that I needed space or whatever  
+– Cleaned my apartment religiously - but not Jordan Peterson style. Screw that guy. 
 
-I’m also moving in with the woman I love. The same one I almost walked away from when I thought I needed a dramatic escape to feel something again.
+Did it fix anything? Of course not. 
 
-Now? I’m ready to build something instead.
+Changing the scenery doesn't do much when the plot is still garbage.
 
-## the plan
+## what I actually needed
 
-**Career**: I’m joining Gitpod as a Sr. PMM, helping them scale into their Series B. Guardrails exist, but the path isn’t paved. I’ll be documenting my journey into self-authorship, and finally shipping a story I’m choosing to write.
+Eventually, the spiral ran out of gas. I just sat with it. 
 
-**Personal**: To reignite the spark, I’m starting something small but real: biking every single bike lane in San Francisco. It’s physical, creative, and grounded in a city I love. I’ll be filming, photographing, and posting as I go. SF has so much potential. We just need new ways of seeing it.
+I started thinking about my senior design project at SCU. If I did it now - as the current version of me - I probably would've picked something safe, something résumé-approved with all the right keywords and social impacts and no risk of failure.
 
-**Social**: You won’t see as much about this here, but the principle’s the same: focus on depth over noise. My time’s going to the people who matter—my partner, my family, my close friends, and, yeah, myself.
+But back then, we built something from scratch in a garage, off-campus, with our own money and no institutional approval. We didn't care about grades or jobs or LinkedIn clout. We just wanted to see if we could turn the design and startup buzzword craziness we were pitching in our engineering circles into something real. 
 
----
+We weren't trying to win. We were trying to *feel it* - the thrill of figuring it out, the friction of uncertainty, the joy of doing something no one asked us to do. 
 
-This isn’t a rebrand. It’s not some productivity hack or curated journey.
+That's what I was missing. Not a new zip code or a different friend group or some better-curated routine. I was missing a challenge that felt like mine. Something open-ended, full of risk, and yeah — probably a little stupid.
 
-It’s just me, finally choosing to stop pressing tab - and write the line by hand.
+## here's the new plan
+
+This is a bike blog now, sort of. But also it's not. It's just me trying to get back to doing dumb, hard things on purpose.
+
+### career
+
+I joined Gitpod as a foundational PMM. It's early, messy, slightly chaotic... There's guardrails for sure, but there's no clear path, which is the point. I'm not here to execute someone else's plan, I'm here to go on a generational run. Or screw it up and try again.
+
+### personal
+
+I'm biking every single bike lane in San Francisco. No real reason. It's just a thing that sounds hard and funny and slightly beautiful and *totally* unnecessary. I'll take photos, maybe some video, and I'll definitely be drinking way too much coffee. But I genuinely believe this city has so much untapped potential for urban biking and I want the world to see it. 
+
+More on that soon. 
+
+### social
+
+I'll be moving in with my partner - yep, the one I almost walked away from during my fake New York phase. Turns out stability is actually scarier than chaos. And better. Usually. I'll also be spending more time with the people that matter the most - my family, my closest friends, and myself - and learning how to focus my time on maintaining and building valuable relationships, diligently. 
+
+This isn't a rebrand. This is me doing what college me would've done if he had a gravel bike, a few unresolved issues, and a mild obsession with maps.
+
+Let's see where this goes.
