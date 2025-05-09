@@ -208,6 +208,16 @@ const sortedRoutes = routes.sort(
       document.dispatchEvent(event);
     });
   });
+
+  // Add scrollbar behavior
+  let scrollTimeout: ReturnType<typeof setTimeout> | undefined;
+  document.addEventListener('scroll', () => {
+    document.documentElement.style.setProperty('--scrollbar-opacity', '1');
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      document.documentElement.style.setProperty('--scrollbar-opacity', '0.1');
+    }, 1000);
+  });
 </script>
 
 <style>
@@ -219,5 +229,25 @@ const sortedRoutes = routes.sort(
       color-mix(in srgb, var(--color-accent) 2%, var(--color-bg))
     );
     background-attachment: fixed;
+  }
+
+  /* Customize scrollbar */
+  :global(::-webkit-scrollbar) {
+    width: 8px;
+    height: 8px;
+  }
+
+  :global(::-webkit-scrollbar-track) {
+    background: transparent;
+  }
+
+  :global(::-webkit-scrollbar-thumb) {
+    background: var(--color-text)/5;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+
+  :global(::-webkit-scrollbar-thumb:hover) {
+    background: var(--color-text)/20;
   }
 </style>
