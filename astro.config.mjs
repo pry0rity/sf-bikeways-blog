@@ -29,6 +29,7 @@ export default defineConfig({
   ],
   vite: {
     server: {
+      allowedHosts: ['.doptig.cloud'],
       headers: {
         'Content-Security-Policy': `
           default-src 'self';

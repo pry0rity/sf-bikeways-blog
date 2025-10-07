@@ -1,7 +1,7 @@
 ---
-title: "on a freezing chicago street"
-description: "In which I nearly died, got bored, and decided to actually try."
-tags: ["career"]
+title: "starting over, sort of"
+description: "What happens when you realize the life you built isn't the one you want."
+tags: ["life"]
 date: 2025-05-07
 location: "North Beach"
 coffeeShop: "Beacon"
@@ -10,88 +10,46 @@ musicTitle: "margot & the nuclear so and so's"
 musicUrl: "https://www.youtube.com/watch?v=UJrhm2Q68fg"
 ---
 
-Two years ago, I almost died.
+Two years ago I ended up in the ICU. Not from anything dramatic—just my body deciding it had had enough of whatever I was doing to it.
 
-They say you can 'see' the other side - not me. Just... pressure. This awful, compressing pressure in my head, like someone vacuum-packed my brain. I was lying eyes open in an ICU bed, fully conscious of the machine breathing for me, and all I could think was:
+I remember lying there, fully awake, machine breathing for me, thinking: "If I'd died, what would I have been doing with my life?"
 
-*If no one had called the ambulance, who even would've died?*
+The answer was depressing. I had a comfortable job I could phone in. Money. Friends. All the boxes checked. But I felt like I was watching my own life from the outside.
 
-Because the person in the bed didn't feel like me. Not really. Just... some guy. Some burnt-out, slightly bloated version of me I didn't recognize.
+## the problem with easy
 
-## the good life™ was quietly killing me
+Nothing was wrong, exactly. That was the problem.
 
-On the surface, nothing was wrong. I had a cushy 9-5 that I could realistically finish from 10-3. I had friends, a social calendar, money to burn on things I didn't need. It was easy. Kind of fun, even.
+I'd optimized for comfort. Low effort, low stakes, low everything. Ship the deck, hit the number, get the Slack reaction. Repeat until retirement or death, whichever came first.
 
-But underneath that? Meh. 
+College me would've been disgusted. That guy stayed up all night building things nobody asked for. Took on projects just to see if he could. Actually cared about stuff.
 
-Nothing was on fire, but everything felt fake. Or flat. Like I was acting out a decent impression of a happy person.
+Now I was "delivering cross-functional value." I'd become a walking SMART goal.
 
-## vibe coding through life
+## the fake solution
 
-3 days in the ICU and 4 days on a couch later, I finally made it on a plane. 
+So I did what people do when they panic: I tried to change everything at once.
 
-I pulled up my activation-locked macbook pro and opened my shiny official Career Planning doc in Notion. No idea why. Morbid curiosity, maybe.
+Told everyone I was moving to New York. Told my partner I needed space. Started cleaning my apartment obsessively (not in a Jordan Peterson way—screw that guy).
 
-First line:
+It didn't help. Changing your location doesn't fix anything when the actual problem is you.
 
-**L4 – Lead ⭐**
+## what actually changed
 
-**That smug little bastard hit me harder than the morphine drip.** 
+Eventually I stopped running and just sat with it.
 
-Oh yeah? You wanna be a *star student?* That's what you're pushing for, the thing that'll make you feel satisfied? 
+I thought about my senior design project at SCU. We built something in a garage with our own money and no institutional backing. We didn't care about résumés or LinkedIn. We just wanted to see if we could make something real.
 
-Would the EMTs have cared that I crushed my quarterly webinar metrics? Would anyone? *Dude*. 
+That's what I'd lost. Not ambition—I had plenty of that. But the willingness to do something hard and uncertain just because it mattered to me.
 
-It hit me all at once: the dissociation, the emptiness, the sense of being stuck. I wasn't doing anything meaningful, I was just chasing the smallest possible wins. Low-effort, low-stakes dopamine. Ship the deck. Hit the number. Get the Slack emoji. Repeat.
+## what I'm doing now
 
-College me would've punched me in the throat.
+I joined Gitpod as a PMM. It's early and messy and there's no playbook. That's the point.
 
-That guy was *feral*. He built weird stuff for no reason. Took on dumb projects just to see if he could do them. Said no when everyone said yes. Stayed up all night over ideas that didn't matter to anyone but him.
+I'm also biking every bike lane in San Francisco. No real reason except it sounds hard and interesting and I think this city could be so much better for cyclists than it is.
 
-Now? I was "delivering cross-functional value." I was a walking, talking SMART goal. 
+And I'm moving in with my partner—the one I almost left during my fake New York phase. Turns out commitment is scarier than chaos. And better.
 
-## the fake escape plan
+This isn't a rebrand or a fresh start. It's just me trying to do things that feel real again.
 
-So I did what any rational person having a quarter-life identity crisis would do:
-
-– Told everyone I was moving to New York  
-– Told my amazing, patient partner that I needed space or whatever  
-– Cleaned my apartment religiously - but not Jordan Peterson style. Screw that guy. 
-
-Did it fix anything? Of course not. 
-
-Changing the scenery doesn't do much when the plot is still garbage.
-
-## what I actually needed
-
-Eventually, the spiral ran out of gas. I just sat with it. 
-
-I started thinking about my senior design project at SCU. If I did it now - as the current version of me - I probably would've picked something safe, something résumé-approved with all the right keywords and social impacts and no risk of failure.
-
-But back then, we built something from scratch in a garage, off-campus, with our own money and no institutional approval. We didn't care about grades or jobs or LinkedIn clout. We just wanted to see if we could turn the design and startup buzzword craziness we were pitching in our engineering circles into something real. 
-
-We weren't trying to win. We were trying to *feel it* - the thrill of figuring it out, the friction of uncertainty, the joy of doing something no one asked us to do. 
-
-That's what I was missing. Not a new zip code or a different friend group or some better-curated routine. I was missing a challenge that felt like mine. Something open-ended, full of risk, and yeah — probably a little stupid.
-
-## here's the new plan
-
-This is a bike blog now, sort of. But also it's not. It's just me trying to get back to doing dumb, hard things on purpose.
-
-### career
-
-I joined Gitpod as a foundational PMM. It's early, messy, slightly chaotic... There's guardrails for sure, but there's no clear path, which is the point. I'm not here to execute someone else's plan, I'm here to go on a generational run. Or screw it up and try again.
-
-### personal
-
-I'm biking every single bike lane in San Francisco. No real reason. It's just a thing that sounds hard and funny and slightly beautiful and *totally* unnecessary. I'll take photos, maybe some video, and I'll definitely be drinking way too much coffee. But I genuinely believe this city has so much untapped potential for urban biking and I want the world to see it. 
-
-More on that soon. 
-
-### social
-
-I'll be moving in with my partner - yep, the one I almost walked away from during my fake New York phase. Turns out stability is actually scarier than chaos. And better. Usually. I'll also be spending more time with the people that matter the most - my family, my closest friends, and myself - and learning how to focus my time on maintaining and building valuable relationships, diligently. 
-
-This isn't a rebrand. This is me doing what college me would've done if he had a gravel bike, a few unresolved issues, and a mild obsession with maps.
-
-Let's see where this goes.
+We'll see how it goes.
