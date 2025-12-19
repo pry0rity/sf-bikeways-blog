@@ -1,55 +1,39 @@
 ---
-title: "starting over, sort of"
-description: "What happens when you realize the life you built isn't the one you want."
-tags: ["life"]
+title: "Lorem Ipsum Dolor Sit"
+description: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt."
+tags: ["lorem", "ipsum"]
 date: 2025-05-07
-location: "North Beach"
-coffeeShop: "Beacon"
-weather: "Moonlight, 55°F"
-musicTitle: "margot & the nuclear so and so's"
-musicUrl: "https://www.youtube.com/watch?v=UJrhm2Q68fg"
+location: "Dolor Amet"
+coffeeShop: "Cafe Ipsum"
+weather: "Sunny, 72°F"
+musicTitle: "Vivamus Lacinia"
+musicUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 ---
 
-Two years ago I ended up in the ICU. Not from anything dramatic—just my body deciding it had had enough of whatever I was doing to it.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
 
-I remember lying there, fully awake, machine breathing for me, thinking: "If I'd died, what would I have been doing with my life?"
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
 
-The answer was depressing. I had a comfortable job I could phone in. Money. Friends. All the boxes checked. But I felt like I was watching my own life from the outside.
+## Pellentesque Habitant
 
-## the problem with easy
+Morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
 
-Nothing was wrong, exactly. That was the problem.
+Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.
 
-I'd optimized for comfort. Low effort, low stakes, low everything. Ship the deck, hit the number, get the Slack reaction. Repeat until retirement or death, whichever came first.
+## Praesent Dapibus
 
-College me would've been disgusted. That guy stayed up all night building things nobody asked for. Took on projects just to see if he could. Actually cared about stuff.
+Neque volutpat ac tincidunt vitae semper quis lectus. Urna id volutpat lacus laoreet non curabitur gravida arcu. Arcu cursus vitae congue mauris rhoncus aenean vel elit.
 
-Now I was "delivering cross-functional value." I'd become a walking SMART goal.
+Pellentesque elit eget gravida cum sociis natoque penatibus et magnis dis parturient montes. Nascetur ridiculus mus mauris vitae ultricies leo integer malesuada nunc.
 
-## the fake solution
+## Cras Adipiscing
 
-So I did what people do when they panic: I tried to change everything at once.
+Enim nunc faucibus a pellentesque sit amet porttitor eget dolor. Amet nisl suscipit adipiscing bibendum est ultricies integer quis auctor. Vitae congue eu consequat ac felis donec et odio.
 
-Told everyone I was moving to New York. Told my partner I needed space. Started cleaning my apartment obsessively (not in a Jordan Peterson way—screw that guy).
+Amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus. Viverra accumsan in nisl nisi scelerisque eu ultrices vitae auctor.
 
-It didn't help. Changing your location doesn't fix anything when the actual problem is you.
+## Fusce Ut Placerat
 
-## what actually changed
+Orci sagittis eu volutpat odio facilisis mauris sit amet massa. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec.
 
-Eventually I stopped running and just sat with it.
-
-I thought about my senior design project at SCU. We built something in a garage with our own money and no institutional backing. We didn't care about résumés or LinkedIn. We just wanted to see if we could make something real.
-
-That's what I'd lost. Not ambition—I had plenty of that. But the willingness to do something hard and uncertain just because it mattered to me.
-
-## what I'm doing now
-
-I joined Gitpod as a PMM. It's early and messy and there's no playbook. That's the point.
-
-I'm also biking every bike lane in San Francisco. No real reason except it sounds hard and interesting and I think this city could be so much better for cyclists than it is.
-
-And I'm moving in with my partner—the one I almost left during my fake New York phase. Turns out commitment is scarier than chaos. And better.
-
-This isn't a rebrand or a fresh start. It's just me trying to do things that feel real again.
-
-We'll see how it goes.
+Pretium lectus quam id leo in vitae turpis massa sed. Nunc sed blandit libero volutpat sed cras ornare arcu dui.
